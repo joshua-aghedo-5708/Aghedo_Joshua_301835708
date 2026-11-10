@@ -1,6 +1,6 @@
 -- A separate performance table using the case's service_visit.opened_at type.
 -- Only this field and a lab row ID are copied. Business constraints stay in Portfolio 1.
--- Generated values are for measuring a selective lookup, not complete case records.
+-- The values are for measuring a selective lookup, not complete case records.
 CREATE SCHEMA query_lab;
 CREATE TABLE query_lab."service_visit" AS
 SELECT "opened_at", 0::bigint AS "lab_row_id" FROM portfolio."service_visit" WITH NO DATA;
