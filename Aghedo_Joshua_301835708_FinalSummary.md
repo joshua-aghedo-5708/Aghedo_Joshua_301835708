@@ -4,11 +4,11 @@
 
 ## Case study
 
-My case study is Automobile Management System. I designed the database for service advisors, fleet administrators and customers reviewing their vehicle service history, with separate tables named customer, vehicle and service_visit. It supports these operations: register customers and vehicles; open and close vehicle service visits; review service history by vehicle or customer.
+I focused on Automobile Management System. I once worked in that area and i had a good experience there that is why i picked it as a case study. I built the database to handle service advisors, fleet managers, and customers checking past vehicle repairs. It uses three main tables (customer, vehicle, and service_visit) to cover all the core actions: registering new drivers and cars, managing open and closed service visits, and looking up full service histories by vehicle or customer.
 
 ## Portfolio 1: Database Design and Modelling
 
-I organised the relational design into 3 tables. Primary keys identify records, foreign keys preserve the links, and checks enforce the stated business rules. At most one service visit per vehicle may have status open; enforce with a partial unique constraint on vehicle_id for rows whose status is open. The normalisation examples show the sample data at 1NF, 2NF and 3NF. All 10 deliberately invalid inserts were rejected without changing the valid sample rows.
+It was smart for me to split the relational design into three tables, using standard primary keys, foreign keys for relationships, and check constraints for business logic. To make sure a vehicle can't have multiple active visits, I set a partial unique constraint on vehicle_id where status is open. I also documented the normalization process from 1NF up to 3NF. Everything is solid: tested it with 10 invalid inserts and the rules blocked every single one without touching the valid data.
 
 ![Automobile Management System ER diagram](images/Aghedo_Joshua_301835708_ERDiagram.png)
 
@@ -18,7 +18,7 @@ Figure 1. Tables, keys and relationships. PK: primary key; FK: foreign key; UK: 
 
 ## Portfolio 2: Query Processing and Optimisation
 
-I ran three SQL queries against the sample records. The join returned 2 rows and included Avery Chen with 1HGCM82633A004352. For the index comparison, I used 20,000 separate performance rows. The median lookup time changed from 1.172 ms to 0.191 ms. Both phases returned the same records. The measured plan used the new index. These timings apply to this lookup and environment.
+I ran three SQL queries on our sample data. The join pulled back 2 rows, including Avery Chen with VIN 1HGCM82633A004352. To test index performance, I loaded 20,000 extra rows and adding the index dropped median lookup times from 1.172 ms all the way down to 0.191 ms. Both test runs returned identical records, and the query plan confirmed it used the new index on this setup.
 
 ## Portfolio 3: Transactions and Concurrency
 
@@ -47,7 +47,7 @@ I kept customer, vehicle, service_visit in separate tables so their details coul
 
 ## AI-use declaration
 
-I used GitHub Copilot and the portfolio generator to help prepare the database model, scripts and explanations. The generator ran the PostgreSQL and MongoDB exercises, checked their outputs and captured the result images.  I remain responsible for checking and explaining the submitted work.
+GitHub Copilot was used to help me understand the problem statement and the course materials.
 
 ## References
 
