@@ -1,6 +1,6 @@
 # Portfolio 4  NoSQL and Advanced Data Models
 
-MongoDB collection auto_service_events was used for visit_opened and inspection_recorded events. These are fictional event examples based on customer, vehicle, service_visit.
+MongoDB collection auto_service_events was used for visit_opened and inspection_recorded events. These are fictional event examples that are based on customer, vehicle, service_visit.
 
 ## Document model
 
