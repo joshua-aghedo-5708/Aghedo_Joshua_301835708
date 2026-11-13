@@ -1,4 +1,4 @@
--- Fictional sample records for Automobile Management System.
+-- Fictional  records for Automobile Management System.
 BEGIN;
 SET LOCAL standard_conforming_strings = on;
 INSERT INTO portfolio."customer" ("customer_id", "full_name", "email", "created_at") VALUES (101, 'Avery Chen', 'avery.chen@example.test', '2025-01-10T09:30:00Z');
