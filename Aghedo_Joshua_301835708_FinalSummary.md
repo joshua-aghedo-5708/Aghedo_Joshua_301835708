@@ -4,11 +4,11 @@
 
 ## Case study
 
-I focused on Automobile Management System. I once worked in that area and i had a good experience there that is why i picked it as a case study. I built the database to handle service advisors, fleet managers, and customers checking past vehicle repairs. It uses three main tables (customer, vehicle, and service_visit) to cover all the core actions: registering new drivers and cars, managing open and closed service visits, and looking up full service histories by vehicle or customer.
+I chose Automobile Management System as the case study as I previously worked in this area and had a good experience. I created a database for service advisors, fleet managers and customers to view previous car repairs. There are three tables, customer, vehicle, service_visit. Each table handles the necessary functions such as adding new drivers and cars, updating opened and closed service visits and viewing service history.
 
 ## Portfolio 1: Database Design and Modelling
 
-It was smart for me to split the relational design into three tables, using standard primary keys, foreign keys for relationships, and check constraints for business logic. To make sure a vehicle can't have multiple active visits, I set a partial unique constraint on vehicle_id where status is open. I also documented the normalization process from 1NF up to 3NF. Everything is solid: tested it with 10 invalid inserts and the rules blocked every single one without touching the valid data.
+It was a good decision to create three tables in the relational design. Each table has primary keys, foreign keys and check constraints to manage the database. Partial unique constraints were added to the vehicle_id column to ensure only one active visit exists per vehicle. I have also detailed how the tables were normalized to 3NF from 1NF. All was completed well and I tested with 10 invalid inserts and all were prevented due to the rules
 
 ![Automobile Management System ER diagram](images/Aghedo_Joshua_301835708_ERDiagram.png)
 
@@ -18,15 +18,15 @@ Figure 1. Tables, keys and relationships. PK: primary key; FK: foreign key; UK: 
 
 ## Portfolio 2: Query Processing and Optimisation
 
-I ran three SQL queries on our sample data. The join pulled back 2 rows, including Avery Chen with VIN 1HGCM82633A004352. To test index performance, I loaded 20,000 extra rows and adding the index dropped median lookup times from 1.172 ms all the way down to 0.191 ms. Both test runs returned identical records, and the query plan confirmed it used the new index on this setup.
+Three SQL queries were performed on the sample data. Two rows were returned from the join which included Avery Chen with VIN 1HGCM82633A004352. I added 20000 additional rows to test indexes. The index reduced the median time taken to retrieve information to 0.191ms from 1.172ms. The data was identical between the tests and the query plan showed that the new index was used.
 
 ## Portfolio 3: Transactions and Concurrency
 
-I used a temporary counter on service_visit to test COMMIT, ROLLBACK and READ COMMITTED isolation. The uncommitted update remained hidden from the other session, and ROLLBACK restored the earlier committed value. Without locking, two increments left the counter at 2. With SELECT FOR UPDATE, Session B waited for Session A and the final value was 3. The helper is confined to this exercise; the case's original business fields stay unchanged.
+I used a temporary counter in the service_visit table to test the different transactions. The update was not visible in the other session as it had not been committed. When rolled back it reverted to the previously committed value. As no locks were used, the counter increased by 2. When using SELECT FOR UPDATE, Session B had to wait for Session A to finish, resulting in the final value being 3. The helper is only for this exercise and the business fields from the case are unchanged
 
 ## Portfolio 4: NoSQL and Advanced Data Models
 
-I used auto_service_events for the case's event documents. MongoDB inserted 4 sample events and returned the expected results for 4 queries. Validation rejected an invalid date type and a duplicate event ID. Embedded snapshots keep related details with an event, while the details field can differ by event type. These are fictional events; PostgreSQL continues to enforce its relational rules.
+I used the auto_service_events table for the event documents in the case. 4 sample events were added using MongoDB and the queries returned the expected results. The validation prevented inserting an invalid date type and duplicate event ID. The embedded snapshot allows the related details to be stored with the event. Details can vary depending on the event type. These events are fictional and PostgreSQL will still apply its relational rules.
 
 ## Repository and evidence
 
@@ -39,11 +39,11 @@ The portfolio folders contain the SQL and JavaScript, explanations, query plans,
 
 ## Portfolio 5: Distributed and Cloud Database Exercise
 
-I proposed three MongoDB replica members across separate failure zones. The discussion covers primary elections, majority acknowledgement, secondary lag and sharding trade-offs for auto_service_events. Replication supports availability, while backups address recovery. PostgreSQL needs its own availability plan. This is the permitted discussion option; no live replica set or failover test was deployed.
+I proposed having three replica members in MongoDB, each in their own failure zone. This discusses primary elections, majority acknowledgement, secondary lag and the trade-offs between sharding and auto_service_events. Replication helps with availability and backups help with recovery. PostgreSQL will need its own availability strategy. This is the only option available to discuss and no active replica set was used.
 
 ## Individual reflection
 
-I kept customer, vehicle, service_visit in separate tables so their details could be maintained without repeating them in every related record. At most one service visit per vehicle may have status open; enforce with a partial unique constraint on vehicle_id for rows whose status is open. The constraint tests check this alongside the required values and record links. One issue illustrated by the two-session exercise is that both sessions can read the same value before either update is committed. Locking the row before reading preserves both increments. The index comparison also shows why I need to check the execution plan as well as the final answer: the same result can require different amounts of database work.
+I separated the customer, vehicle and service_visit tables to ensure the details are stored without duplication. Only one service visit can be opened per vehicle so a partial unique constraint should be placed on the vehicle_id column. This constraint will check that only one can be opened. The constraint checks ensure that the correct values are present along with the correct relationships. An issue I faced was when using two sessions, both can view the same value. Using a lock on the row ensures both increments are counted. The index comparison shows that I need to look at the execution plan to ensure that the database is not doing unnecessary work.
 
 ## AI-use declaration
 
